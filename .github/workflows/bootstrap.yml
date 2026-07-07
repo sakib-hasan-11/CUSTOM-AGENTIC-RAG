@@ -48,7 +48,7 @@ jobs:
 
 
       - name: Install Python Requirements
-        working-directory: rag_ingestion
+        # working-directory: rag_ingestion
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
