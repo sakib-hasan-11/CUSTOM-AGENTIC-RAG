@@ -67,6 +67,18 @@ jobs:
           HF_TOKEN=${{ secrets.HF_TOKEN }}
           EOF
 
+      - name: Verify Environment Variables
+        working-directory: rag_ingestion
+        run: |
+          echo "OPENAI_API_KEY exists: $([ -n "$OPENAI_API_KEY" ] && echo YES || echo NO)"
+          echo "PINECONE_API exists: $([ -n "$PINECONE_API" ] && echo YES || echo NO)"
+          echo "INDEX_NAME exists: $([ -n "$INDEX_NAME" ] && echo YES || echo NO)"
+          echo "HF_TOKEN exists: $([ -n "$HF_TOKEN" ] && echo YES || echo NO)"
+
+          echo
+          echo ".env contents (keys only):"
+          sed 's/=.*$/=***/' .env
+
 
       # Bootstrap
 
