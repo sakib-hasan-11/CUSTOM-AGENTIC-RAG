@@ -1,0 +1,28 @@
+
+# s3 data loader
+# ipykernel>=6.29.5
+langchain>=0.3.25
+
+# langchain-tavily>=0.2.3
+# langgraph>=0.4.8
+# langsmith>=0.3.45
+python-dotenv>=1.1.0
+langchain_openai
+# fastapi==0.138.0
+# uvicorn==0.49.0
+pydantic==2.13.4
+# websockets==15.0.1
+langchain_pinecone==0.2.13
+# psycopg
+# psycopg-binary==3.3.4
+# redis==6.4.0
+streamlit
+unstructured[pdf]==0.18.14
+langchain-text-splitters==0.3.11
+# requests
+# database
+pinecone==7.3.0
+tiktoken
+
+unstructured-pytesseract
+pytesseract

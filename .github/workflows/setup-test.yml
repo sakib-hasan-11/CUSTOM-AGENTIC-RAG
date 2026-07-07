@@ -1,0 +1,61 @@
+name: Test Setup Script
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+  pull_request:
+
+  workflow_dispatch:
+
+jobs:
+
+  setup-test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Make setup.sh executable
+        run: chmod +x rag_ingestion/setup.sh
+
+      - name: Run setup.sh
+        run: sudo bash rag_ingestion/setup.sh
+
+      
+      # Verification
+      
+
+      - name: Verify Poppler
+        run: |
+          which pdfinfo
+          pdfinfo -v
+
+      - name: Verify Tesseract
+        run: |
+          which tesseract
+          tesseract --version
+
+      - name: Verify OCR Languages
+        run: |
+          tesseract --list-langs
+
+      
+      # Summary
+      
+
+      - name: Success
+        run: |
+          echo "=================================="
+          echo "Setup completed successfully."
+          echo "=================================="

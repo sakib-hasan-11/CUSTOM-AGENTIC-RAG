@@ -1,0 +1,41 @@
+schemas/
+    element.py
+
+source/
+    element_type.py 
+
+config/
+    settings.py
+
+utils/
+    splitter.py
+
+parsers/
+    pdf_parser.py (for production create a s3 file loader/save file in temp folder and use this same)
+
+# make usre have poppler,YOLOX,tesseract and set them as system environment variable.
+
+schemas/
+    chunk.py
+
+chunking/
+    chunk_builder.py
+
+vision/
+    base.py
+    openai_provider.py
+    processor.py
+
+utils/
+    markdown_renderer.py
+
+schemas/
+    vector_record.py
+
+embedding/
+    openai_provider.py
+    processor.py
+
+
+vectorstore/
+    pinecone_writer.py

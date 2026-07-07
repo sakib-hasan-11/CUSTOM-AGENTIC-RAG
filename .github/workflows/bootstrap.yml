@@ -1,0 +1,77 @@
+name: Bootstrap Validation
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+  pull_request:
+
+  workflow_dispatch:
+
+jobs:
+
+  bootstrap:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+
+      # Checkout
+
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+
+      # Python
+
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+
+      # System Dependencies
+
+
+      - name: Install System Dependencies
+        run: |
+          chmod +x rag_ingestion/setup.sh
+          sudo bash rag_ingestion/setup.sh
+
+
+      # Python Dependencies
+
+
+      - name: Install Python Requirements
+        working-directory: rag_ingestion
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+
+      # Environment Variables
+
+
+      - name: Create .env
+        working-directory: rag_ingestion
+        run: |
+          cat <<EOF > .env
+          OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
+          PINECONE_API=${{ secrets.PINECONE_API }}
+          INDEX_NAME=${{ secrets.INDEX_NAME }}
+          HF_TOKEN=${{ secrets.HF_TOKEN }}
+          EOF
+
+
+      # Bootstrap
+
+
+      - name: Run Bootstrap
+        working-directory: rag_ingestion
+        run: |
+          python -c "from bootstrap import Bootstrap; Bootstrap().run()"
